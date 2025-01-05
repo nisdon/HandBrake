@@ -70,6 +70,19 @@ hb_avsub_context_t * decavsubInit( hb_work_object_t * w, hb_job_t * job )
         av_dict_set( &av_opts, "data_field", "first", 0 );
         av_dict_set( &av_opts, "real_time", "1", 0 );
     }
+#if 1
+    if (ctx->subtitle->source == SSASUB)
+    {
+        av_dict_set( &av_opts, "sub_type", "ass", 0 );
+	}
+#else
+    if (ctx->subtitle->source == VOBSUB)
+    {
+        av_dict_set( &av_opts, "sub_type", "bitmap", 0 );
+        av_dict_set( &av_opts, "canvas_size", "1440:1080", 0 );
+        av_dict_set( &av_opts, "ass_single_rect", "1", 0 );
+	}
+#endif
     if (ctx->subtitle->source == VOBSUB && ctx->subtitle->palette_set)
     {
         char * palette = hb_strdup_printf(
