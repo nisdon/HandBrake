@@ -75,6 +75,7 @@ hb_avsub_context_t * decavsubInit( hb_work_object_t * w, hb_job_t * job )
     {
         av_dict_set( &av_opts, "sub_type", "ass", 0 );
         av_dict_set( &av_opts, "ass_single_rect", "1", 0 );
+        av_dict_set( &av_opts, "ignore_ruby", "1", 0 );
 	}
 #else
     if (ctx->subtitle->source == VOBSUB)
